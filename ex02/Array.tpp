@@ -10,37 +10,74 @@
 #                                                                              #
 # **************************************************************************** #*/
 
-
 #include "Array.hpp"
 
 template<typename T>
 Array<T>::Array(void)
 {
-
+	_n = 0;
+	_arr = new T[_n];
 }
 
 template<typename T>
 Array<T>::Array(unsigned int n)
 {
+	_n = n;
+	_arr = new T[_n];
+}
 
+template<typename T >
+Array<T>::Array(Array const &src)
+{
+	*this = src;
 }
 
 template<typename T>
-Array<T> const &Array<T>::operator=(Array const &src)
+Array<T> &Array<T>::operator=(Array const &src)
 {
+	if (this != &src)
+	{
+		_n = src._n;
+		_arr = new T[_n];
+		for (unsigned int i = 0; i < _n; i++)
+			_arr[i] = src._arr[i];
+	}
+	return (*this);
+}
 
+template<typename T>
+T &Array<T>::operator[](unsigned int index)
+{
+	if (index >= _n)
+		throw Array<T>::outOfBoundsException();
+	return (_arr[index]);
+}
+
+template<typename T>
+T const &Array<T>::operator[](unsigned int index) const
+{
+	if (index >= _n)
+		throw Array<T>::outOfBoundsException();
+	return (_arr[index]);
+}
+
+template<typename T>
+void Array<T>::print(void)
+{
+	for (unsigned int i = 0; i < _n; i++)
+		std::cout << "Array in pos[" << i << "] contains = " << _arr[i] << std::endl;
 }
 
 template<typename T>
 Array<T>::~Array(void)
 {
-
+	delete[] _arr;
 }
 
 template<typename T>
-T Array<T>::size(void)
+unsigned int Array<T>::size(void)
 {
-
+	return (_n);
 }
 
 template<typename T>

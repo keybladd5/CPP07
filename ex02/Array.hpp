@@ -11,9 +11,9 @@
 /* ************************************************************************** */
 
 #ifndef ARRAY_HPP
-#define ARRAY_HPP
-
-//MUST use the operator new[] to allocate memory
+# define ARRAY_HPP
+# include <iostream>
+# include <cstdlib>
 
 template<typename T>
 class Array
@@ -23,13 +23,15 @@ class Array
 			unsigned int _n;
 
 	public:
-			Array(void); //creates an empty array
-			Array(unsigned int); //: Creates an array of n elements initialized by default.
+			Array(void);
+			Array(unsigned int);
 			Array(Array const &);
-			Array const &operator=(Array const &); //modifying either the original array or its copy after copying musn’t affect the other array.
+			Array &operator=(Array const &);
+			T const &operator[](unsigned int) const;
+			T &operator[](unsigned int);
 			~Array();
-			//Elements can be accessed through the subscript operator: [ ].
-			T size(void);
+			unsigned int size(void);
+			void print(void);
 			class outOfBoundsException : public std::exception
 			{
 				const char* what() const throw();
@@ -37,5 +39,5 @@ class Array
 
 };
 
-#include "Array.tpp";
+# include "Array.tpp"
 #endif

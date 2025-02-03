@@ -15,7 +15,7 @@ NAME = bin02
 #########
 RM = rm -rf
 CC = c++
-CFLAGS = -g -Wall -Wextra -Werror -std=c++98 -fsanitize=address -pedantic 
+CFLAGS = -g -Wall -Wextra -Werror -std=c++98 -fsanitize=address -fsanitize=leak -pedantic 
 
 #########
 
