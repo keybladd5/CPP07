@@ -29,7 +29,10 @@ Array<T>::Array(unsigned int n)
 template<typename T >
 Array<T>::Array(Array const &src)
 {
-	*this = src;
+	_n = src._n;
+	_arr = new T[_n];
+	for (unsigned int i = 0; i < _n; i++)
+		_arr[i] = src._arr[i];
 }
 
 template<typename T>
@@ -37,6 +40,7 @@ Array<T> &Array<T>::operator=(Array const &src)
 {
 	if (this != &src)
 	{
+		delete[] _arr;
 		_n = src._n;
 		_arr = new T[_n];
 		for (unsigned int i = 0; i < _n; i++)
